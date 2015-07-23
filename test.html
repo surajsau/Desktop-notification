@@ -6,7 +6,6 @@
 		<script type="text/javascript">
 			function notify(){
 				document.getElementById('notificationButton').addEventListener('click', function(e){
-					console.log('clicked');
 					url = document.getElementById('match_url').value;
 					notification(url);
 				});
@@ -26,19 +25,26 @@
 				});
 			}
 
-			function showNotification(){
+			// function showNotification(){
+			// 	checkPermission();
+			// 	var ms = 10000;
+			// 	var n = new Notification('Suraj well done :)', {
+			// 		body: 'Finally notification is working!',
+			// 		icon: 'images/fb.png'
+			// 	});
+
+			// 	n.onshow = function(){setTimeout(n.close(), ms)}
+			// }
+
+			function notify(title, msg, event){
 				checkPermission();
 				var ms = 10000;
-				var n = new Notification('Suraj well done :)', {
-					body: 'Finally notification is working!',
-					icon: 'images/fb.png'
+				var notif = new Notification(title, {
+					body: msg,
+					icon: 'images/2.png'
 				});
 
-				n.onshow = function(){setTimeout(n.close, ms)}
-			}
-
-			function notify(){
-
+				notif.onshow = function(){setTimeout(notif.close(), ms)}
 			}
 
 			function notification(url){
@@ -61,7 +67,7 @@
 								team1_score = innings[i].runs;
 								team1_wickets = innings[i].wickets;
 								current_team = team1_id;
-							}else{
+							}else if((innings[i].batting_team_id == team2_id) && (innings[i].innings_number != "0")){
 								team2_score = innings[i].runs;
 								team2_wickets = innings[i].wickets;
 								current_team = team2_id;
@@ -88,25 +94,24 @@
 						console.log(titleMatch);
 						var regex = /(<([^>]+)>)/ig;
 
-						results = comms[0].ball;
+						curr = data.comms[0].ball[0];
+						over = curr.overs_actual;
+						players = curr.players;
+						events = curr.event;
+						commentary = curr.text;
+						commentary = commentary.replace(regex, "");
 
-						for(i=0; i<results.length; i++){
-							curr = results[i];
-							over = curr.overs_actual;
-							players = curr.players;
-
-							det = curr.event;
-							commentary = curr.text;
-							commentary = commentary.replace(regex, "");
-							console.log(over + ':' + players + ',' + det + '..' + commentary);
-						}
+						messageBall = over + ": " + players + "," + events + ".." + commentary;
+						
+						// console.log(over + players + events +commentary);
+						notify(titleMatch, messageBall, events);
 					}
 				});
 			}	
 		</script>
 	</head>
 	<body>
-		<input type="text" id = "match_url" placeholder = "Enter URL" value = "http://www.espncricinfo.com/ci/engine/match/743959.json"/>
+		<input type="text" id = "match_url" placeholder = "Enter URL" value = "http://www.espncricinfo.com/ci/engine/match/875545.json"/>
 		<button id = "notificationButton" onclick="notify()">Notify</button>
 		<div id = "data"></div>
 	</body>
