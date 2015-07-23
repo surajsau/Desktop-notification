@@ -36,16 +36,16 @@
 			// 	n.onshow = function(){setTimeout(n.close(), ms)}
 			// }
 
-			function notify(title, msg, event){
-				checkPermission();
-				var ms = 10000;
-				var notif = new Notification(title, {
-					body: msg,
-					icon: 'images/2.png'
-				});
+			// function notify(title, msg, event){
+			// 	checkPermission();
+			// 	var ms = 10000;
+			// 	var notif = new Notification(title, {
+			// 		body: msg,
+			// 		icon: 'images/2.png'
+			// 	});
 
-				notif.onshow = function(){setTimeout(notif.close(), ms)}
-			}
+
+			// }
 
 			function notification(url){
 				console.log(url);
@@ -105,6 +105,15 @@
 						
 						// console.log(over + players + events +commentary);
 						notify(titleMatch, messageBall, events);
+
+						checkPermission();
+						var ms = 10000;
+						var notif = new Notification(titleMatch, {
+							body: messageBall,
+							icon: 'images/2.png'
+						});
+
+						notif.onshow = function(){setTimeout(notif.close(), 10000);}
 					}
 				});
 			}	
