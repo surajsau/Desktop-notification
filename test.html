@@ -1,39 +1,113 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>DEMO</title>
-	<script type="text/javascript">
-		document.getElementById('notificationButton').addEventListener('click', function(e){
-			showNotification();
-		});
+	<head>
+		<title>DEMO</title>
+		<script src="jquery-1.9.1.js"></script>
+		<script type="text/javascript">
+			function notify(){
+				document.getElementById('notificationButton').addEventListener('click', function(e){
+					console.log('clicked');
+					url = document.getElementById('match_url').value;
+					notification(url);
+				});
+			}
 
-		function checkPermission(){
-			Notification.requestPermission(function (status){
-				if(Notification.permission !== status){
-					Notification.permission = status;
-				}
+			function checkPermission(){
+				Notification.requestPermission(function (status){
+					if(Notification.permission !== status){
+						Notification.permission = status;
+					}
 
-				if(Notification.permission === 'granted'){
-					console.log('Permission granted');
-				}else{
-					console.log('Persmission denied');
-				}
-			});
-		}
+					if(Notification.permission === 'granted'){
+						console.log('Permission granted');
+					}else{
+						console.log('Persmission denied');
+					}
+				});
+			}
 
-		function showNotification(){
-			checkPermission();
-			var ms = 10000;
-			var n = new Notification('Suraj well done :)', {
-				body: 'Finally notification is working!',
-				icon: 'images/fb.png'
-			});
+			function showNotification(){
+				checkPermission();
+				var ms = 10000;
+				var n = new Notification('Suraj well done :)', {
+					body: 'Finally notification is working!',
+					icon: 'images/fb.png'
+				});
 
-			n.onshow = function(){setTimeout(n.close, ms)}
-		}
-	</script>
-</head>
-<body>
-<button id = "notificationButton">Notify</button>
-</body>
+				n.onshow = function(){setTimeout(n.close, ms)}
+			}
+
+			function notify(){
+
+			}
+
+			function notification(url){
+				console.log(url);
+				$.ajax({
+					url: url,
+					dataType: "jsonp",
+					success: function(data){
+						console.log(data);
+						team1_score = team2_score = team1_wickets = team2_wickets = -1;
+						team1_id = data.match.team1_id;
+						team2_id = data.match.team2_id;
+						team1_name = data.match.team1_name;
+						team2_name = data.match.team2_name;
+						current_team = team1_id;
+						innings = data.innings;
+
+						for(i=0; i<innings.length; i++){
+							if((innings[i].batting_team_id == team1_id) && (innings[i].innings_number != "0")){
+								team1_score = innings[i].runs;
+								team1_wickets = innings[i].wickets;
+								current_team = team1_id;
+							}else{
+								team2_score = innings[i].runs;
+								team2_wickets = innings[i].wickets;
+								current_team = team2_id;
+							}
+						}
+						team1_score_string = "";
+						team2_score_string = "";
+
+						if(team1_score != -1){
+							team1_score_string =  team1_score + '/' + team1_wickets;
+							if(current_team ==  team1_id){
+								team1_score_string += " *";
+							} 
+						}
+
+						if(team2_score != -1){
+							team2_score_string = team2_score + '/' + team2_wickets;
+							if(current_team ==  team2_id){
+								team2_score_string += " *";
+							}
+						}
+
+						titleMatch = team1_name + ' ' + team1_score_string + ' v ' + team2_name + ' ' + team2_score_string;
+						console.log(titleMatch);
+						var regex = /(<([^>]+)>)/ig;
+
+						results = comms[0].ball;
+
+						for(i=0; i<results.length; i++){
+							curr = results[i];
+							over = curr.overs_actual;
+							players = curr.players;
+
+							det = curr.event;
+							commentary = curr.text;
+							commentary = commentary.replace(regex, "");
+							console.log(over + ':' + players + ',' + det + '..' + commentary);
+						}
+					}
+				});
+			}	
+		</script>
+	</head>
+	<body>
+		<input type="text" id = "match_url" placeholder = "Enter URL" value = "http://www.espncricinfo.com/ci/engine/match/743959.json"/>
+		<button id = "notificationButton" onclick="notify()">Notify</button>
+		<div id = "data"></div>
+	</body>
 </html>
