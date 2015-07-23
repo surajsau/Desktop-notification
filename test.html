@@ -2,10 +2,7 @@
 <html>
 <head>
 	<title>DEMO</title>
-</head>
-<body>
-<button id = "notificationButton">Notify</button>
-<script type="text/javascript">
+	<script type="text/javascript">
 		document.getElementById('notificationButton').addEventListener('click', function(e){
 			showNotification();
 		});
@@ -35,5 +32,8 @@
 			n.onshow = function(){setTimeout(n.close, ms)}
 		}
 	</script>
+</head>
+<body>
+<button id = "notificationButton">Notify</button>
 </body>
 </html>
