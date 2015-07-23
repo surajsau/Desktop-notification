@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DEMO</title>
+</head>
+<body>
+<button id = "notificationButton">Notify</button>
+<script type="text/javascript">
+		document.getElementById('notificationButton').addEventListener('click', function(e){
+			showNotification();
+		});
+
+		function checkPermission(){
+			Notification.requestPermission(function (status){
+				if(Notification.permission !== status){
+					Notification.permission = status;
+				}
+
+				if(Notification.permission === 'granted'){
+					console.log('Permission granted');
+				}else{
+					console.log('Persmission denied');
+				}
+			});
+		}
+
+		function showNotification(){
+			checkPermission();
+			var ms = 10000;
+			var n = new Notification('Title', {
+				body: 'Body of notification',
+				icon: 'images/fb.png'
+			});
+
+			n.onshow = function(){setTimeout(n.close, ms)}
+		}
+	</script>
+</body>
+</html>
