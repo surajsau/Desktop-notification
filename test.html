@@ -115,9 +115,7 @@
 							icon: 'images/2.png'
 						});
 
-						notif.onshow(function(){
-							setTimeout(notif.close, ms);
-						});
+						notif.onshow = function(){setTimeout(notif.close, ms)};
 					}
 				});
 			}	
