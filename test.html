@@ -5,10 +5,12 @@
 		<script src="jquery-1.9.1.js"></script>
 		<script type="text/javascript">
 			function notify(){
-				document.getElementById('notificationButton').addEventListener('click', function(e){
-					url = document.getElementById('match_url').value;
-					notification(url);
-				});
+				// document.getElementById('notificationButton').addEventListener('click', function(e){
+				// 	url = document.getElementById('match_url').value;
+				// 	notification(url);
+				// });
+				url = document.getElementById('match_url').value;
+				notification(url);
 			}
 
 			function checkPermission(){
