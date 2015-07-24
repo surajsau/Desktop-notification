@@ -39,28 +39,6 @@
 				});
 			}
 
-			// function showNotification(){
-			// 	checkPermission();
-			// 	var ms = 10000;
-			// 	var n = new Notification('Suraj well done :)', {
-			// 		body: 'Finally notification is working!',
-			// 		icon: 'images/fb.png'
-			// 	});
-
-			// 	n.onshow = function(){setTimeout(n.close(), ms)}
-			// }
-
-			// function notify(title, msg, event){
-			// 	checkPermission();
-			// 	var ms = 10000;
-			// 	var notif = new Notification(title, {
-			// 		body: msg,
-			// 		icon: 'images/2.png'
-			// 	});
-
-
-			// }
-
 			function notification(url){
 				console.log(url);
 				$.ajax({
@@ -71,8 +49,8 @@
 						team1_score = team2_score = team1_wickets = team2_wickets = -1;
 						team1_id = data.match.team1_id;
 						team2_id = data.match.team2_id;
-						team1_name = data.match.team1_name;
-						team2_name = data.match.team2_name;
+						team1_name = data.match.team1_abbreviation;
+						team2_name = data.match.team2_abbreviation;
 						current_team = team1_id;
 						innings = data.innings;
 
