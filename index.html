@@ -20,9 +20,14 @@
 				// 	url = document.getElementById('match_url').value;
 				// 	notification(url);
 				// });
-				url = document.getElementById('match_url').value;
-				url = "http://www.espncricinfo.com/ci/engine/match/" + url + ".json"
-				setInterval(notification(url), 5000);
+				url_id = document.getElementById('match_url').value;
+				url = "http://www.espncricinfo.com/ci/engine/match/" + url_id + ".json"
+				notification(url);
+
+				setInterval(function(){
+					url = "http://www.espncricinfo.com/ci/engine/match/" + url_id + ".json"
+					notification(url);
+				}, 30000);
 			}
 
 			function checkPermission(){
