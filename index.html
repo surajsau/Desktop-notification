@@ -20,6 +20,7 @@
 				// 	url = document.getElementById('match_url').value;
 				// 	notification(url);
 				// });
+				checkPermission();
 				url_id = document.getElementById('match_url').value;
 				url = "http://www.espncricinfo.com/ci/engine/match/" + url_id + ".json"
 				notification(url);
@@ -27,7 +28,7 @@
 				setInterval(function(){
 					url = "http://www.espncricinfo.com/ci/engine/match/" + url_id + ".json"
 					notification(url);
-				}, 30000);
+				}, 45000);
 			}
 
 			function checkPermission(){
@@ -102,8 +103,6 @@
 						
 						// console.log(over + players + events +commentary);
 						//notify(titleMatch, messageBall, events);
-
-						checkPermission();
 						var ms = 10000;
 						var notif = new Notification(titleMatch, {
 							body: messageBall,
