@@ -1,18 +1,10 @@
 <!DOCTYPE HTML>
-<!--
-	Eventually by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Eventually by HTML5 UP</title>
+		<title>live commentary @ Scores.</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<script src="jquery-1.9.1.js"></script>
 		<script type="text/javascript">
 			function notify(){
@@ -28,7 +20,7 @@
 				setInterval(function(){
 					url = "http://www.espncricinfo.com/ci/engine/match/" + url_id + ".json"
 					notification(url);
-				}, 45000);
+				}, 5000);
 			}
 
 			function checkPermission(){
@@ -120,21 +112,17 @@
 		</script>
 	</head>
 	<body>
-
-		<!-- Header -->
 			<header id="header">
 				<h1>Scores.</h1>
 				<p>Enter the cricinfo match id and<br />
 				enjoy commentary notifications <a href="http://surajsau.in">@surajsau</a>.</p>
 			</header>
 
-		<!-- Signup Form -->
 			<form id="signup-form" method="post" action="#">
 				<input type="text" name="email" id="match_url" placeholder="Match id (e.g., 817213)" />
 				<input type="submit" value="Notify" onclick="notify()" />
 			</form>
 
-		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="https://twitter.com/theRoshogulla" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -146,9 +134,6 @@
 					<li>&copy; hmmm..</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
 				</ul>
 			</footer>
-
-		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 
 	</body>
