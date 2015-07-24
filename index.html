@@ -22,7 +22,7 @@
 				// });
 				url = document.getElementById('match_url').value;
 				url = "http://www.espncricinfo.com/ci/engine/match/" + url + ".json"
-				notification(url);
+				setInterval(notification(url), 5000);
 			}
 
 			function checkPermission(){
@@ -93,7 +93,7 @@
 						commentary = curr.text;
 						commentary = commentary.replace(regex, "");
 
-						messageBall = over + ": " + players + "," + events + ".." + commentary;
+						messageBall = over + ": " + players + ", " + commentary;
 						
 						// console.log(over + players + events +commentary);
 						//notify(titleMatch, messageBall, events);
@@ -105,7 +105,7 @@
 							icon: 'images/2.png'
 						});
 
-						setTimeout(notif.close.bind(notif), 5000);
+						// setTimeout(notif.close.bind(notif), 5000);
 						// notif.onclick = function(){
 						// 	url = url.replace("json", "html");
 						// 	window.open(url);
